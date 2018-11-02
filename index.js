@@ -1,7 +1,8 @@
-/** @format */
+/**
+ * APP launcher
+ * @flow
+ */
 
-import {AppRegistry} from 'react-native';
-import App from './App';
-import {name as appName} from './app.json';
+import setup from './app/src/setup';
 
-AppRegistry.registerComponent(appName, () => App);
+export default setup();

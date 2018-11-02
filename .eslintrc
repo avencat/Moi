@@ -1,0 +1,16 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "plugins": [
+    "react",
+    "react-native"
+  ],
+  "rules": {
+    "import/no-unresolved": [
+      2, {
+        "ignore": ["@components", "@config", "@containers", "@redux", "@resources", "@sagas", "@tools"]
+      }
+    ],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  }
+}
