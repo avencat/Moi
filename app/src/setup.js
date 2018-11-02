@@ -3,10 +3,10 @@
  *
  * Setup the app
  */
-import React from 'react';
-import { combineReducers } from 'redux';
-import { AppRegistry, YellowBox } from 'react-native';
+import * as React from 'react';
 import { Provider } from 'react-redux';
+import { AppRegistry, YellowBox } from 'react-native';
+import store from '@redux/store';
 import MoiApp from './MoiApp';
 
 YellowBox.ignoreWarnings([
@@ -14,9 +14,6 @@ YellowBox.ignoreWarnings([
 ]);
 
 export default function setup() {
-  // create provider (will provide store to MoiApp)
-  const store = combineReducers({});
-
   const component = () => (
     <Provider store={store}>
       <MoiApp />

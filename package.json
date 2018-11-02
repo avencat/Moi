@@ -15,7 +15,8 @@
     "react-native-device-info": "^0.24.3",
     "react-navigation": "^2.18.2",
     "react-redux": "^5.1.0",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "seamless-immutable": "^7.1.4"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

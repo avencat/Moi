@@ -1,20 +1,23 @@
 import { StyleSheet } from 'react-native';
+import { Colors } from '@resources/themes';
 
 export default StyleSheet.create({
   container: {
+    alignItems: 'center',
+    backgroundColor: Colors.white,
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
+
+  instructions: {
+    color: Colors.darkText,
+    marginBottom: 5,
+    textAlign: 'center',
+  },
+
   welcome: {
     fontSize: 20,
-    textAlign: 'center',
     margin: 10,
-  },
-  instructions: {
     textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });
