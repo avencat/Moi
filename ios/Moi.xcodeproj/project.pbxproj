@@ -58,6 +58,7 @@
 		C6B999121AA049CDA1078A22 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95B9B9E8A9774E8DBE98F344 /* Zocial.ttf */; };
 		16B8252CE48E4FF6951A37B9 /* libRNLanguages.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAAB9C77B614372BC838FC5 /* libRNLanguages.a */; };
 		B7407FA959734913BCAAACDD /* libRNLanguages-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE44E48B3EF2414D95293DF8 /* libRNLanguages-tvOS.a */; };
+		64A9923FE4264CD791CB38BF /* Verdana.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FB1837A40BD4A82BB62AD4F /* Verdana.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -387,6 +388,7 @@
 		87A0BA4823534624BA559720 /* RNLanguages.xcodeproj */ = {isa = PBXFileReference; name = "RNLanguages.xcodeproj"; path = "../node_modules/react-native-languages/ios/RNLanguages.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		DEAAB9C77B614372BC838FC5 /* libRNLanguages.a */ = {isa = PBXFileReference; name = "libRNLanguages.a"; path = "libRNLanguages.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		AE44E48B3EF2414D95293DF8 /* libRNLanguages-tvOS.a */ = {isa = PBXFileReference; name = "libRNLanguages-tvOS.a"; path = "libRNLanguages-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		2FB1837A40BD4A82BB62AD4F /* Verdana.ttf */ = {isa = PBXFileReference; name = "Verdana.ttf"; path = "../app/src/resources/fonts/Verdana.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -675,6 +677,7 @@
 				1E67B0C7BE6342C98A434078 /* Octicons.ttf */,
 				5E6F31AEAD114D95A0ED4C86 /* SimpleLineIcons.ttf */,
 				95B9B9E8A9774E8DBE98F344 /* Zocial.ttf */,
+				2FB1837A40BD4A82BB62AD4F /* Verdana.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1141,6 +1144,7 @@
 				4147BAA3B4CB4DBCA425A053 /* Octicons.ttf in Resources */,
 				E8288F2D307D4CE284BEB04E /* SimpleLineIcons.ttf in Resources */,
 				C6B999121AA049CDA1078A22 /* Zocial.ttf in Resources */,
+				64A9923FE4264CD791CB38BF /* Verdana.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
