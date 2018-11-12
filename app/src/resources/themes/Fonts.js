@@ -16,14 +16,23 @@ const size = {
   avatar: 30,
   extraText: 14,
   chatInputSize: 13,
-  koosmikTitle: 47,
   avatarName: 10,
   notification: Metrics.mediumAndDown ? 14 : 16,
-  currencySize: 24,
+};
+
+const type = {
+  base: 'Verdana',
+  bold: 'Verdana-Bold',
+  emphasis: 'Verdana-BoldItalic',
+  baseLight: 'Verdana-Light',
+  semiBold: 'Verdana-SemiBold',
+  semiBoldItalic: 'Verdana-SemiBoldItalic',
+  lightItalic: 'Verdana-LightItalic',
 };
 
 const Fonts = {
   size,
+  type,
 };
 
 export default Fonts;

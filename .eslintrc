@@ -11,6 +11,8 @@
         "ignore": ["@components", "@config", "@containers", "@redux", "@resources", "@sagas", "@tools"]
       }
     ],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "max-len": [2, 120],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/destructuring-assignment": [0]
   }
 }
