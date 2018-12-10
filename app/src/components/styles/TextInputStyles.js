@@ -4,6 +4,7 @@ import { Colors, Metrics } from '@resources/themes';
 export default StyleSheet.create({
   container: {
     alignSelf: 'center',
+    backgroundColor: Colors.white,
     borderColor: Colors.border,
     borderRadius: 4,
     borderWidth: 1,

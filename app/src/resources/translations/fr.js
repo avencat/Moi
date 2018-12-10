@@ -6,9 +6,10 @@ export default {
     FORM: {
       ERROR: "Mauvais nom d'utilisateur ou mot de passe",
       PASSWORD: 'Mot de passe',
-      USERNAME: "Nom d'utilisateur",
+      EMAIL: 'Email',
     },
     LOGIN: 'Se connecter',
     REGISTER: "S'inscrire",
+    TITLE: 'Moi',
   },
 };

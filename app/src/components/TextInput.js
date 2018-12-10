@@ -16,12 +16,16 @@ export default class TextInput extends React.PureComponent<Props> {
     underlineColorAndroid: Colors.transparent,
   };
 
+  blur = () => this.textInput.blur();
+
+  focus = () => this.textInput.focus();
+
   render() {
     const { containerStyle } = this.props;
 
     return (
       <View style={[styles.container, containerStyle]}>
-        <OfficialTextInput {...this.props} />
+        <OfficialTextInput {...this.props} ref={(ref) => { this.textInput = ref; }} />
       </View>
     );
   }
