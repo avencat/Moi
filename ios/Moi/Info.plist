@@ -70,5 +70,21 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>to pick your profile picture</string>
+	<key>NSCameraUsageDescription</key>
+	<string>to take your profile picture</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>we don't use it</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>we don't use it</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>to pick your profile picture</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>we don't use it</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>we don't use it</string>
+	<key>NSMotionUsageDescription</key>
+	<string>we don't use it</string>
 </dict>
 </plist>

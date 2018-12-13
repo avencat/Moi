@@ -1,24 +1,40 @@
 // @flow
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-native';
 import { DrawerItems, NavigationScreenProps } from 'react-navigation';
 import Button from '@components/Button';
+import i18n from '@resources/translations';
 import Navigation from '@config/Navigation';
+import { LogoutCreators } from '@containers/login/redux/logoutReducer';
+import styles from './DrawerContentStyles';
 
-type Props = NavigationScreenProps & {};
+type Props = NavigationScreenProps & {
+  logoutRequest: Function,
+};
 
-export default class DrawerContent extends React.PureComponent<Props> {
-  logout = () => this.props.navigation.navigate(Navigation.LOGIN);
+const mapDispatchToProps = dispatch => ({
+  logoutRequest: () => dispatch(LogoutCreators.logoutRequest()),
+});
+
+class DrawerContent extends React.PureComponent<Props> {
+  logout = () => {
+    this.props.navigation.navigate(Navigation.LOGIN);
+    this.props.logoutRequest();
+  };
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={styles.container}>
         <DrawerItems {...this.props} />
         <Button
-          text="Logout"
+          buttonStyle={styles.logoutButton}
+          text={i18n.t('DRAWER.LOGOUT')}
           onPress={this.logout}
         />
       </SafeAreaView>
     );
   }
 }
+
+export default connect(null, mapDispatchToProps)(DrawerContent);

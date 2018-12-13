@@ -3,6 +3,11 @@ package com.moi;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import fr.bamlab.rnimageresizer.ImageResizerPackage;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
+import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
+import com.rjblopes.opensettings.OpenSettingsPackage;
 import com.rnfingerprint.FingerprintAuthPackage;
 import com.reactcommunity.rnlanguages.RNLanguagesPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -27,6 +32,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFetchBlobPackage(),
+            new ImageResizerPackage(),
+            new OpenSettingsPackage(),
+            new PickerPackage(),
+            new ReactNativeConfigPackage(),
             new FingerprintAuthPackage(),
             new RNLanguagesPackage(),
             new VectorIconsPackage(),

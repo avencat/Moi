@@ -9,6 +9,7 @@ import styles from './styles/ButtonStyles';
 type Props = {
   buttonStyle?: ViewStyleProp,
   buttonTextStyle?: TextStyleProp,
+  isDisabled?: boolean,
   isLoading?: boolean,
   onPress: Function,
   text: string,
@@ -18,16 +19,27 @@ export default class Button extends React.PureComponent<Props> {
   static defaultProps = {
     buttonStyle: null,
     buttonTextStyle: null,
+    isDisabled: false,
     isLoading: false,
+  };
+
+  onPress = () => {
+    if (this.props.onPress && !this.props.isLoading && !this.props.isDisabled) {
+      this.props.onPress();
+    }
   };
 
   render() {
     const {
-      buttonStyle, buttonTextStyle, isLoading, onPress, text,
+      buttonStyle, buttonTextStyle, isDisabled, isLoading, text,
     } = this.props;
 
     return (
-      <Touchable onPress={onPress} style={[styles.button, buttonStyle]}>
+      <Touchable
+        activeOpacity={isDisabled || isLoading ? 1 : 0.3}
+        onPress={this.onPress}
+        style={[styles.button, buttonStyle]}
+      >
         {isLoading
           ? (
             <ActivityIndicator

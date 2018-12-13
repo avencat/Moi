@@ -6,7 +6,8 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import { AppRegistry, YellowBox } from 'react-native';
-import store from '@redux/store';
+import StoreSetup from '@redux/store';
+import Firebase from '@config/Firebase';
 import MoiApp from './MoiApp';
 
 YellowBox.ignoreWarnings([
@@ -14,6 +15,14 @@ YellowBox.ignoreWarnings([
 ]);
 
 export default function setup() {
+  try {
+    Firebase();
+  } catch (e) {
+    console.info(e); // eslint-disable-line
+  }
+
+  const store = StoreSetup();
+
   const component = () => (
     <Provider store={store}>
       <MoiApp />

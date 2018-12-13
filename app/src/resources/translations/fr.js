@@ -1,10 +1,15 @@
 export default {
+  DRAWER: {
+    LOGOUT: 'Se déconnecter',
+  },
   FORM: {
     REQUIRED: 'Ce champ est requis',
   },
   LOGIN: {
     FORM: {
-      ERROR: "Mauvais nom d'utilisateur ou mot de passe",
+      ERROR: {
+        FILL_ALL: 'Tous les champs sont requis',
+      },
       PASSWORD: 'Mot de passe',
       EMAIL: 'Email',
     },

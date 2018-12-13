@@ -7,10 +7,11 @@ import {
 } from 'react-native';
 import Button from '@components/Button';
 import i18n from '@resources/translations';
+import Navigation from '@config/Navigation';
 import TextInput from '@components/TextInput';
 import ErrorComponent from '@components/ErrorComponent';
-import { LoginCreators } from '@containers/login/redux/login';
-import Navigation from '@config/Navigation';
+import { LoginCreators } from '@containers/login/redux/loginReducer';
+import { RegisterCreators } from '@containers/login/redux/registerReducer';
 import styles from './LoginScreenStyles';
 
 type Props = NavigationScreenProps & {
@@ -19,11 +20,19 @@ type Props = NavigationScreenProps & {
     fetching: boolean,
     success: boolean,
   },
+  loginRequest: Function,
+  register: {
+    error?: string,
+    fetching: boolean,
+    success: boolean,
+  },
+  registerRequest: Function,
 };
 
 type State = {
   error: any,
-  isLoading: boolean,
+  isLoginLoading: boolean,
+  isRegisterLoading: boolean,
   marginTop: Animated.Value,
   password: string,
   email: string,
@@ -31,21 +40,40 @@ type State = {
 
 const mapStateToProps = state => ({
   login: state.forms.login,
+  register: state.forms.register,
 });
 const mapDispatchToProps = dispatch => ({
   loginRequest: payload => dispatch(LoginCreators.loginRequest(payload)),
+  registerRequest: payload => dispatch(RegisterCreators.registerRequest(payload)),
 });
 class LoginScreen extends React.Component<Props, State> {
   static navigationOptions = { header: null };
 
-  static getDerivedStateFromProps(nextProps) {
-    const nextState = {};
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const nextState = {
+      isLoginLoading: nextProps.login.fetching,
+      isRegisterLoading: nextProps.register.fetching,
+    };
 
-    if (nextProps.login.error) {
+    if (
+      (nextProps.login.success
+        && !nextProps.login.fetching
+        && prevState.isLoginLoading)
+      || (nextProps.register.success
+        && !nextProps.login.fetching
+        && prevState.isRegisterLoading)
+    ) {
+      nextProps.navigation.navigate(Navigation.APP);
+    } else if (prevState.isLoginLoading && nextProps.login.error) {
       Object.assign(nextState, {
-        error: i18n.t('LOGIN.FORM.ERROR'),
+        error: nextProps.login.error,
+      });
+    } else if (prevState.isRegisterLoading && nextProps.register.error) {
+      Object.assign(nextState, {
+        error: nextProps.register.error,
       });
     }
+
     return nextState;
   }
 
@@ -53,11 +81,12 @@ class LoginScreen extends React.Component<Props, State> {
     super(props);
 
     this.state = {
+      email: '',
       error: null,
-      isLoading: false,
+      isLoginLoading: false,
+      isRegisterLoading: false,
       marginTop: new Animated.Value(0),
       password: '',
-      email: '',
     };
   }
 
@@ -79,24 +108,31 @@ class LoginScreen extends React.Component<Props, State> {
     this.keyboardWillHideListener.remove();
   }
 
-  onChangePassword = (password: string) => this.setState({ password });
+  onChangeEmail = (email: string) => this.setState({ email, error: null });
 
-  onChangeEmail = (email: string) => this.setState({ email });
+  onChangePassword = (password: string) => this.setState({ password, error: null });
 
   onPressRegister = () => {
     const { email, password } = this.state;
 
     if (!email || !password) {
+      this.setState({ error: i18n.t('LOGIN.FORM.ERROR.FILL_ALL') });
       return;
     }
 
-    this.setState({ isLoading: true });
+    this.props.registerRequest({ email, password });
   };
 
-  onPress = () => this.setState({ isLoading: true }, () => setTimeout(() => {
-    this.setState({ isLoading: false });
-    this.props.navigation.navigate(Navigation.APP);
-  }, 1000));
+  onPressLogin = () => {
+    const { email, password } = this.state;
+
+    if (!email || !password) {
+      this.setState({ error: i18n.t('LOGIN.FORM.ERROR.FILL_ALL') });
+      return;
+    }
+
+    this.props.loginRequest({ email, password });
+  };
 
   focusPassword = () => this.passwordInput.focus();
 
@@ -118,10 +154,8 @@ class LoginScreen extends React.Component<Props, State> {
 
   render() {
     const {
-      error, isLoading, marginTop, password, email,
+      error, isLoginLoading, isRegisterLoading, marginTop, password, email,
     } = this.state;
-
-    console.log(marginTop);
 
     return (
       <SafeAreaView style={styles.container}>
@@ -131,6 +165,7 @@ class LoginScreen extends React.Component<Props, State> {
             <ErrorComponent show={!!error}>{error}</ErrorComponent>
 
             <TextInput
+              autoCapitalize="none"
               onChangeText={this.onChangeEmail}
               onSubmitEditing={this.focusPassword}
               placeholder={i18n.t('LOGIN.FORM.EMAIL')}
@@ -140,6 +175,7 @@ class LoginScreen extends React.Component<Props, State> {
             />
 
             <TextInput
+              autoCapitalize="none"
               onChangeText={this.onChangePassword}
               onSubmitEditing={this.onPress}
               placeholder={i18n.t('LOGIN.FORM.PASSWORD')}
@@ -150,10 +186,17 @@ class LoginScreen extends React.Component<Props, State> {
               value={password}
             />
 
-            <Button isLoading={isLoading} onPress={this.onPress} text={i18n.t('LOGIN.LOGIN')} />
+            <Button
+              isDisabled={isRegisterLoading}
+              isLoading={isLoginLoading}
+              onPress={this.onPressLogin}
+              text={i18n.t('LOGIN.LOGIN')}
+            />
+
             <Button
               buttonStyle={{ marginTop: -10 }}
-              isLoading={isLoading}
+              isDisabled={isLoginLoading}
+              isLoading={isRegisterLoading}
               onPress={this.onPressRegister}
               text={i18n.t('LOGIN.REGISTER')}
             />

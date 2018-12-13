@@ -14,31 +14,32 @@ export const LoginCreators = {
     type: Types.LOGIN_REQUEST,
     payload,
   }),
-  loginRequestSuccess: payload => ({
+  loginRequestSuccess: response => ({
     type: Types.LOGIN_REQUEST_SUCCESS,
-    payload,
+    response,
   }),
-  loginRequestFailure: payload => ({
+  loginRequestFailure: error => ({
     type: Types.LOGIN_REQUEST_FAILURE,
-    payload,
+    error,
   }),
 };
 
 /* ------------- Initial State ------------- */
 
 const INITIAL_STATE = Immutable({
-  response: null,
   error: null,
   fetching: false,
+  response: null,
+  success: false,
 });
 
 /* ------------- Reducers ------------- */
 
-const loginRequest = state => state.merge({ fetching: true });
+const loginRequest = () => INITIAL_STATE.merge({ fetching: true });
 
-const loginRequestSuccess = (state, { response }) => state.merge({ fetching: false, error: null, response });
+const loginRequestSuccess = (state, { response }) => INITIAL_STATE.merge({ success: true, response });
 
-const loginRequestFailure = (state, { error }) => state.merge({ fetching: false, error, response: null });
+const loginRequestFailure = (state, { error }) => INITIAL_STATE.merge({ error });
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -54,5 +55,3 @@ export function reducer(state = INITIAL_STATE, action) {
   }
   return state;
 }
-
-/* ------------- Selectors ------------- */
