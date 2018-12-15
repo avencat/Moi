@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import { put, takeEvery } from 'redux-saga/effects';
+import { UserCreators } from '@redux/reducers/user';
 import { LoginCreators, LoginTypes } from '@containers/login/redux/loginReducer';
 
 /**
@@ -7,18 +8,20 @@ import { LoginCreators, LoginTypes } from '@containers/login/redux/loginReducer'
  */
 
 export function* authLoginTask({ payload }) {
-  // set authorization bearer for api calls
   try {
     // request user information
     const { user } = yield firebase.auth().signInWithEmailAndPassword(payload.email, payload.password);
-    yield put(LoginCreators.loginRequestSuccess(JSON.parse(JSON.stringify(user))));
+    const userObject = yield JSON.parse(JSON.stringify(user));
+    yield Object.assign(userObject, { password: payload.password });
+    yield put(LoginCreators.loginRequestSuccess(userObject));
+    yield put(UserCreators.userSet(userObject));
   } catch (error) {
     yield put(LoginCreators.loginRequestFailure(error.message ? error.message : error.code));
   }
 }
 
 /**
- * Loop auth saga
+ * Loop login saga
  */
 export function* loginSaga() {
   yield takeEvery(LoginTypes.LOGIN_REQUEST, authLoginTask);

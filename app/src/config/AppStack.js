@@ -1,9 +1,10 @@
 // @flow
 import * as React from 'react';
 import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
+import DrawerContent from '@config/DrawerContent';
 import HomeScreen from '@containers/home/HomeScreen';
 import ProfileScreen from '@containers/profile/ProfileScreen';
-import DrawerContent from '@config/DrawerContent';
+import SecurityScreen from '@containers/security/SecurityScreen';
 
 export default createDrawerNavigator({
   Home: createStackNavigator({
@@ -13,6 +14,10 @@ export default createDrawerNavigator({
 
   Profile: createStackNavigator({
     ProfileScreen,
+  }),
+
+  Security: createStackNavigator({
+    SecurityScreen,
   }),
 }, {
   contentComponent: props => <DrawerContent {...props} />,

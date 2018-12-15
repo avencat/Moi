@@ -8,10 +8,11 @@ export default {
   },
   border: '#909AA3',
   error: '#A4031F',
+  modal: 'rgba(0, 0, 0, 0.3)',
   text: {
     base: '#5A646D',
     dark: '#38444F',
   },
-  transparent: 'rgba(0,0,0,0)',
+  transparent: 'rgba(0, 0, 0, 0)',
   white: '#FFFFFF',
 };

@@ -181,7 +181,7 @@ export default class AbstractImageUpload<Props, State> extends React.Component<P
     return this.compressImage(image);
   };
 
-  // Compress the image if enabledl
+  // Compress the image if enabled
   compressImage = async (image) => {
     const options = this.compressOptions;
     if (!options.enable) {

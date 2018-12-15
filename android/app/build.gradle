@@ -140,6 +140,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-keychain')
     compile project(':rn-fetch-blob')
     compile project(':react-native-image-resizer')
     compile project(':react-native-device-settings')

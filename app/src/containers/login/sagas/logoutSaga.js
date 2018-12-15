@@ -11,12 +11,11 @@ export function* authLogoutTask() {
     yield put(LogoutCreators.logoutRequestSuccess(JSON.parse(JSON.stringify(data))));
   } catch (error) {
     yield put(LogoutCreators.logoutRequestFailure(error.message ? error.message : error.code));
-    // TODO: Do something with the error
   }
 }
 
 /**
- * Loop auth saga
+ * Loop logout saga
  */
 export function* logoutSaga() {
   yield takeEvery(LogoutTypes.LOGOUT_REQUEST, authLogoutTask);

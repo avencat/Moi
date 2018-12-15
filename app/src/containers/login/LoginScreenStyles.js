@@ -13,6 +13,15 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
 
+  fingerprint: {
+    alignItems: 'center',
+    backgroundColor: Colors.defaultApp.yellow,
+    borderRadius: 10,
+    height: 50,
+    justifyContent: 'center',
+    width: 50,
+  },
+
   title: {
     color: Colors.white,
     fontFamily: Fonts.type.base,

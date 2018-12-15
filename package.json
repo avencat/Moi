@@ -21,6 +21,7 @@
     "react-native-elements": "^0.19.1",
     "react-native-image-crop-picker": "^0.21.3",
     "react-native-image-resizer": "^1.0.0",
+    "react-native-keychain": "^3.0.0",
     "react-native-languages": "^3.0.1",
     "react-native-permissions": "^1.1.1",
     "react-native-touch-id": "^4.3.0",

@@ -37,8 +37,24 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>we don&apos;t use it</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>we don&apos;t use it</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>we don&apos;t use it</string>
+	<key>NSCameraUsageDescription</key>
+	<string>to take your profile picture</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
+	<key>NSMotionUsageDescription</key>
+	<string>we don&apos;t use it</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>to pick your profile picture</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>to pick your profile picture</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>we don&apos;t use it</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -70,21 +86,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>to pick your profile picture</string>
-	<key>NSCameraUsageDescription</key>
-	<string>to take your profile picture</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>we don't use it</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>we don't use it</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>to pick your profile picture</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>we don't use it</string>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>we don't use it</string>
-	<key>NSMotionUsageDescription</key>
-	<string>we don't use it</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>to allow you quick and secure access to your account.</string>
 </dict>
 </plist>

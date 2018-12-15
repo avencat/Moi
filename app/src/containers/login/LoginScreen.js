@@ -1,14 +1,20 @@
 // @flow
 import * as React from 'react';
+import firebase from 'firebase';
 import { connect } from 'react-redux';
+import TouchID from 'react-native-touch-id';
+import { Icon } from 'react-native-elements';
+import * as Keychain from 'react-native-keychain';
 import { NavigationScreenProps } from 'react-navigation';
 import {
-  Animated, Keyboard, View, Platform, SafeAreaView, Text, TouchableWithoutFeedback,
+  Animated, AsyncStorage, Keyboard, Platform, SafeAreaView, Text, TouchableWithoutFeedback, View,
 } from 'react-native';
 import Button from '@components/Button';
+import { Colors } from '@resources/themes';
 import i18n from '@resources/translations';
 import Navigation from '@config/Navigation';
 import TextInput from '@components/TextInput';
+import Touchable from '@components/Touchable';
 import ErrorComponent from '@components/ErrorComponent';
 import { LoginCreators } from '@containers/login/redux/loginReducer';
 import { RegisterCreators } from '@containers/login/redux/registerReducer';
@@ -87,10 +93,16 @@ class LoginScreen extends React.Component<Props, State> {
       isRegisterLoading: false,
       marginTop: new Animated.Value(0),
       password: '',
+      touchIdEnabled: false,
     };
   }
 
   componentDidMount() {
+    /* global __DEV__ */
+    if (__DEV__ && firebase.auth().currentUser) {
+      this.props.navigation.navigate(Navigation.APP);
+    }
+
     Platform.select({
       android: () => {
         this.keyboardWillShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardWillShow);
@@ -100,7 +112,9 @@ class LoginScreen extends React.Component<Props, State> {
         this.keyboardWillShowListener = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
         this.keyboardWillHideListener = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
       },
-    });
+    })();
+
+    this.presentTouchId();
   }
 
   componentWillUnmount() {
@@ -152,15 +166,37 @@ class LoginScreen extends React.Component<Props, State> {
     }).start();
   };
 
+  presentTouchId = async () => {
+    const touchIdEnabled = await AsyncStorage.getItem('@MoiAsyncStorage:touchIdEnabled');
+    this.setState({ touchIdEnabled: touchIdEnabled === 'true' });
+
+    if (touchIdEnabled === 'true' && !__DEV__) {
+      Keychain.getGenericPassword()
+        .then(({ username, password }) => {
+          TouchID.authenticate(`${i18n.t('LOGIN.TOUCH_ID_LOGIN')} "${username}"`, {
+            fallbackLabel: i18n.t('LOGIN.TOUCH_ID_CANCEL'),
+          })
+            .then((success) => {
+              if (success) {
+                this.setState({ email: '*********@****.***', password: '***************' });
+                this.props.loginRequest({ email: username, password });
+              }
+            })
+            .catch(() => {});
+        })
+        .catch(() => {});
+    }
+  };
+
   render() {
     const {
-      error, isLoginLoading, isRegisterLoading, marginTop, password, email,
+      email, error, isLoginLoading, isRegisterLoading, marginTop, password, touchIdEnabled,
     } = this.state;
 
     return (
       <SafeAreaView style={styles.container}>
         <TouchableWithoutFeedback onPress={this.hideKeyboard}>
-          <View style={[styles.contentContainer, { marginTop }]}>
+          <Animated.View style={[styles.contentContainer, { marginTop }]}>
             <Text style={styles.title}>{i18n.t('LOGIN.TITLE')}</Text>
             <ErrorComponent show={!!error}>{error}</ErrorComponent>
 
@@ -177,7 +213,7 @@ class LoginScreen extends React.Component<Props, State> {
             <TextInput
               autoCapitalize="none"
               onChangeText={this.onChangePassword}
-              onSubmitEditing={this.onPress}
+              onSubmitEditing={this.onPressLogin}
               placeholder={i18n.t('LOGIN.FORM.PASSWORD')}
               ref={(ref) => { this.passwordInput = ref; }}
               returnKeyType="send"
@@ -200,7 +236,15 @@ class LoginScreen extends React.Component<Props, State> {
               onPress={this.onPressRegister}
               text={i18n.t('LOGIN.REGISTER')}
             />
-          </View>
+
+            {touchIdEnabled && (
+              <Touchable onPress={this.presentTouchId}>
+                <View style={styles.fingerprint}>
+                  <Icon color={Colors.white} name="fingerprint" />
+                </View>
+              </Touchable>
+            )}
+          </Animated.View>
         </TouchableWithoutFeedback>
       </SafeAreaView>
     );

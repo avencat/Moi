@@ -13,6 +13,7 @@
     ],
     "max-len": [2, 120],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/destructuring-assignment": [0]
+    "react/destructuring-assignment": [0],
+    "react/no-access-state-in-setstate": [0]
   }
 }
