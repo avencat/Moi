@@ -2,15 +2,15 @@
 import firebase from 'firebase';
 import { put, select, takeEvery } from 'redux-saga/effects';
 import {
-  UpdateDatabasePhotoURLCreators,
-  UpdateDatabasePhotoURLTypes,
-} from '@containers/profile/redux/updateDatabasePhotoURLReducer';
+  UpdateDatabaseUsernameCreators,
+  UpdateDatabaseUsernameTypes,
+} from '@containers/profile/redux/updateDatabaseUsernameReducer';
 
 /**
- *  Update Database PhotoURL task
+ *  Update Database Username task
  */
 
-export function* updateDatabasePhotoURLTask({ payload }) {
+export function* updateDatabaseUsernameTask({ payload }) {
   try {
     // request user information
     const store = yield select();
@@ -19,15 +19,15 @@ export function* updateDatabasePhotoURLTask({ payload }) {
     const oldUserData = yield snapshot.val();
     yield Object.assign(userData, oldUserData);
     yield Object.assign(userData, {
-      photoURL: payload.photoURL,
       timestamp: Date.now(),
+      username: payload.username,
     });
     yield firebase.database().ref(`/users/${store.user.uid}`).set(userData);
 
-    yield put(UpdateDatabasePhotoURLCreators.updateDatabasePhotoURLRequestSuccess(payload.photoURL));
+    yield put(UpdateDatabaseUsernameCreators.updateDatabaseUsernameRequestSuccess(payload.username));
   } catch (error) {
     yield put(
-      UpdateDatabasePhotoURLCreators.updateDatabasePhotoURLRequestFailure(
+      UpdateDatabaseUsernameCreators.updateDatabaseUsernameRequestFailure(
         error.message ? error.message : JSON.stringify(error),
       ),
     );
@@ -35,8 +35,8 @@ export function* updateDatabasePhotoURLTask({ payload }) {
 }
 
 /**
- * Loop update Database photoURL saga
+ * Loop update Database username saga
  */
-export function* updateDatabasePhotoURLSaga() {
-  yield takeEvery(UpdateDatabasePhotoURLTypes.UPDATE_DATABASE_PHOTO_URL_REQUEST, updateDatabasePhotoURLTask);
+export function* updateDatabaseUsernameSaga() {
+  yield takeEvery(UpdateDatabaseUsernameTypes.UPDATE_DATABASE_USERNAME_REQUEST, updateDatabaseUsernameTask);
 }

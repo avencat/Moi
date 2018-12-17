@@ -5,12 +5,14 @@ import { LogoutCreators, LogoutTypes } from '@containers/login/redux/logoutReduc
 /**
  * Auth logout task
  */
-export function* authLogoutTask() {
+export function* authLogoutTask({ callback }) {
   try {
     const data = yield firebase.auth().signOut();
     yield put(LogoutCreators.logoutRequestSuccess(JSON.parse(JSON.stringify(data))));
+    yield callback();
   } catch (error) {
     yield put(LogoutCreators.logoutRequestFailure(error.message ? error.message : error.code));
+    yield callback();
   }
 }
 

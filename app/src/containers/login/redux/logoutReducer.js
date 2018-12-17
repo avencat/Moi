@@ -10,7 +10,8 @@ export const LogoutTypes = {
 
 const Types = LogoutTypes;
 export const LogoutCreators = {
-  logoutRequest: () => ({
+  logoutRequest: callback => ({
+    callback,
     type: Types.LOGOUT_REQUEST,
   }),
   logoutRequestSuccess: response => ({
@@ -26,6 +27,7 @@ export const LogoutCreators = {
 /* ------------- Initial State ------------- */
 
 const INITIAL_STATE = Immutable({
+  callback: null,
   error: null,
   fetching: false,
   response: null,
@@ -34,7 +36,7 @@ const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 
-const logoutRequest = () => INITIAL_STATE;
+const logoutRequest = (state, { callback }) => INITIAL_STATE.merge({ callback });
 
 const logoutRequestSuccess = (state, { response }) => INITIAL_STATE.merge({ success: true, response });
 

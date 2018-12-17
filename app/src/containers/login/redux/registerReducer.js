@@ -37,7 +37,7 @@ const INITIAL_STATE = Immutable({
 
 const registerRequest = () => INITIAL_STATE.merge({ fetching: true });
 
-const registerRequestSuccess = (state, { response }) => INITIAL_STATE.merge({ response });
+const registerRequestSuccess = (state, { response }) => INITIAL_STATE.merge({ success: true, response });
 
 const registerRequestFailure = (state, { error }) => INITIAL_STATE.merge({ error });
 

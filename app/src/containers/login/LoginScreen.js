@@ -42,6 +42,8 @@ type State = {
   marginTop: Animated.Value,
   password: string,
   email: string,
+  touchIdCompatible: boolean,
+  touchIdEnabled: boolean,
 };
 
 const mapStateToProps = state => ({
@@ -66,7 +68,7 @@ class LoginScreen extends React.Component<Props, State> {
         && !nextProps.login.fetching
         && prevState.isLoginLoading)
       || (nextProps.register.success
-        && !nextProps.login.fetching
+        && !nextProps.register.fetching
         && prevState.isRegisterLoading)
     ) {
       nextProps.navigation.navigate(Navigation.APP);
@@ -93,6 +95,7 @@ class LoginScreen extends React.Component<Props, State> {
       isRegisterLoading: false,
       marginTop: new Animated.Value(0),
       password: '',
+      touchIdCompatible: false,
       touchIdEnabled: false,
     };
   }
@@ -114,7 +117,7 @@ class LoginScreen extends React.Component<Props, State> {
       },
     })();
 
-    this.presentTouchId();
+    this.getTouchIdStatus();
   }
 
   componentWillUnmount() {
@@ -148,6 +151,22 @@ class LoginScreen extends React.Component<Props, State> {
     this.props.loginRequest({ email, password });
   };
 
+  getTouchIdStatus = async () => {
+    let touchIdCompatible = false;
+    try {
+      const touchIdString = await TouchID.isSupported();
+      if (touchIdString) {
+        touchIdCompatible = true;
+      }
+    } catch (err) {} // eslint-disable-line
+    const touchIdEnabled = await AsyncStorage.getItem('@MoiAsyncStorage:touchIdEnabled');
+    this.setState({ touchIdCompatible, touchIdEnabled: touchIdEnabled === 'true' });
+
+    if (touchIdCompatible && touchIdEnabled === 'true' && !__DEV__) {
+      this.presentTouchId();
+    }
+  };
+
   focusPassword = () => this.passwordInput.focus();
 
   hideKeyboard = () => Keyboard.dismiss();
@@ -166,31 +185,27 @@ class LoginScreen extends React.Component<Props, State> {
     }).start();
   };
 
-  presentTouchId = async () => {
-    const touchIdEnabled = await AsyncStorage.getItem('@MoiAsyncStorage:touchIdEnabled');
-    this.setState({ touchIdEnabled: touchIdEnabled === 'true' });
-
-    if (touchIdEnabled === 'true' && !__DEV__) {
-      Keychain.getGenericPassword()
-        .then(({ username, password }) => {
-          TouchID.authenticate(`${i18n.t('LOGIN.TOUCH_ID_LOGIN')} "${username}"`, {
-            fallbackLabel: i18n.t('LOGIN.TOUCH_ID_CANCEL'),
-          })
-            .then((success) => {
-              if (success) {
-                this.setState({ email: '*********@****.***', password: '***************' });
-                this.props.loginRequest({ email: username, password });
-              }
-            })
-            .catch(() => {});
+  presentTouchId = () => {
+    Keychain
+      .getGenericPassword()
+      .then(({ username, password }) => {
+        TouchID.authenticate(`${i18n.t('LOGIN.TOUCH_ID_LOGIN')} "${username}"`, {
+          fallbackLabel: i18n.t('LOGIN.TOUCH_ID_CANCEL'),
         })
-        .catch(() => {});
-    }
+          .then((success) => {
+            if (success) {
+              this.setState({ email: '*********@****.***', password: '***************' });
+              this.props.loginRequest({ email: username, password });
+            }
+          })
+          .catch(() => {});
+      })
+      .catch(() => {});
   };
 
   render() {
     const {
-      email, error, isLoginLoading, isRegisterLoading, marginTop, password, touchIdEnabled,
+      email, error, isLoginLoading, isRegisterLoading, marginTop, password, touchIdCompatible, touchIdEnabled,
     } = this.state;
 
     return (
@@ -237,7 +252,7 @@ class LoginScreen extends React.Component<Props, State> {
               text={i18n.t('LOGIN.REGISTER')}
             />
 
-            {touchIdEnabled && (
+            {touchIdCompatible && touchIdEnabled && (
               <Touchable onPress={this.presentTouchId}>
                 <View style={styles.fingerprint}>
                   <Icon color={Colors.white} name="fingerprint" />

@@ -14,13 +14,14 @@ type Props = NavigationScreenProps & {
 };
 
 const mapDispatchToProps = dispatch => ({
-  logoutRequest: () => dispatch(LogoutCreators.logoutRequest()),
+  logoutRequest: payload => dispatch(LogoutCreators.logoutRequest(payload)),
 });
 
 class DrawerContent extends React.PureComponent<Props> {
   logout = () => {
-    this.props.navigation.navigate(Navigation.LOGIN);
-    this.props.logoutRequest();
+    this.props.logoutRequest(() => {
+      this.props.navigation.navigate(Navigation.LOGIN);
+    });
   };
 
   render() {
