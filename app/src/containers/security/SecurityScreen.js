@@ -5,7 +5,7 @@ import TouchID from 'react-native-touch-id';
 import * as Keychain from 'react-native-keychain';
 import { NavigationScreenProps } from 'react-navigation';
 import {
-  AsyncStorage, ScrollView, Switch, Text, View,
+  AsyncStorage, Platform, ScrollView, Switch, Text, View,
 } from 'react-native';
 import i18n from '@resources/translations';
 import DrawerButton from '@components/DrawerButton';
@@ -44,7 +44,10 @@ class SecurityScreen extends React.Component<Props, State> {
 
   componentDidMount() {
     TouchID.isSupported()
-      .then(touchIdString => this.setState({ touchIdCompatible: true, touchIdString }))
+      .then(touchIdString => this.setState({
+        touchIdCompatible: true,
+        touchIdString: Platform.OS === 'android' ? 'TouchID' : touchIdString,
+      }))
       .catch(() => {});
 
     this.getTouchIdEnabled();
@@ -84,7 +87,7 @@ class SecurityScreen extends React.Component<Props, State> {
       <ScrollView style={styles.container}>
         {touchIdCompatible ? (
           <View style={styles.touchIdContainer}>
-            <Text>{touchIdString}</Text>
+            <Text style={styles.touchIdString}>{touchIdString}</Text>
             <Switch onValueChange={this.toggleTouchId} value={touchIdEnabled} />
           </View>
         ) : (

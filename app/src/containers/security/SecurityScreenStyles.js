@@ -23,4 +23,10 @@ export default StyleSheet.create({
     marginVertical: 15,
     width: '90%',
   },
+
+  touchIdString: {
+    color: Colors.text.dark,
+    fontFamily: Fonts.type.base,
+    fontSize: Fonts.size.medium,
+  },
 });

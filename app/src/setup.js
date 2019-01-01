@@ -3,16 +3,15 @@
  *
  * Setup the app
  */
+/* eslint-disable import/first */
+require('@config/Polyfill.js'); // eslint-disable-line
+import firebase from 'firebase'; // eslint-disable-line
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import { AppRegistry, YellowBox } from 'react-native';
+import { AppRegistry } from 'react-native';
 import StoreSetup from '@redux/store';
 import Firebase from '@config/Firebase';
 import MoiApp from './MoiApp';
-
-YellowBox.ignoreWarnings([
-  'Warning: Failed prop type: Invalid prop `marginBottom` supplied to `BaseLightBox`.',
-]);
 
 export default function setup() {
   try {

@@ -25,7 +25,11 @@ export default class TextInput extends React.PureComponent<Props> {
 
     return (
       <View style={[styles.container, containerStyle]}>
-        <OfficialTextInput {...this.props} ref={(ref) => { this.textInput = ref; }} />
+        <OfficialTextInput
+          {...this.props}
+          ref={(ref) => { this.textInput = ref; }}
+          style={[styles.defaultTextInput, this.props.style]}
+        />
       </View>
     );
   }
