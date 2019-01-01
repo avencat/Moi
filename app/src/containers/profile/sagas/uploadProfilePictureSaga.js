@@ -1,13 +1,12 @@
 // @flow
 import firebase from 'firebase';
 import RNFetchBlob from 'rn-fetch-blob';
-import { put, takeEvery } from 'redux-saga/effects';
+import { put, select, takeEvery } from 'redux-saga/effects';
 import Utils from '@tools/Utils';
 import {
   UploadProfilePictureCreators,
   UploadProfilePictureTypes,
 } from '@containers/profile/redux/uploadProfilePictureReducer';
-import { select } from 'redux-saga/es/effects';
 
 /**
  *  Upload profile picture task

@@ -28,9 +28,6 @@ const compressImageIOS = async (imagePath, currentImageSize, maxSize = 2000000, 
       }
     }
 
-    console.info(
-      `Sending image ${imageURI} of ${imgSize}B. Max size allowed is ${maxSize}B so success is ${imgSize <= maxSize}.`,
-    );
     return { imageURI, success: imgSize <= maxSize, newImage };
   } catch (err) {
     throw err;
@@ -69,11 +66,6 @@ export default {
         }
         quality = quality > 0 ? quality - 10 : 0;
       }
-
-      console.info(
-        `Sending image ${imageURI} of ${imgSize}B. Max size allowed is ${maxSize}B so success is ${imgSize <=
-        maxSize}.`,
-      );
       return { imageURI, success: imgSize <= maxSize, newImage };
     } catch (err) {
       throw err;
