@@ -213,7 +213,9 @@ class ProfileScreen extends AbstractImageUpload<Props, State> {
     try {
       this.setState({ errorPictures: null, showPictureModal: false });
       this.checkAndLaunchCamera().then((image) => {
-        this.props.uploadProfilePictureRequest({ image });
+        if (image) {
+          this.props.uploadProfilePictureRequest({ image });
+        }
       });
     } catch (err) {
       this.setState({ errorPictures: err.message || JSON.stringify(err) });
@@ -224,7 +226,9 @@ class ProfileScreen extends AbstractImageUpload<Props, State> {
     try {
       this.setState({ errorPictures: null, showPictureModal: false });
       this.checkAndOpenPhotoLibrary().then((image) => {
-        this.props.uploadProfilePictureRequest({ image });
+        if (image) {
+          this.props.uploadProfilePictureRequest({ image });
+        }
       });
     } catch (err) {
       this.setState({ errorPictures: err.message || JSON.stringify(err) });
