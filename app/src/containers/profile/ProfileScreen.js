@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { NavigationScreenProps } from 'react-navigation';
 import {
-  ActivityIndicator, Image, Keyboard, Modal, SafeAreaView, ScrollView, Text, TouchableWithoutFeedback, View,
+  Keyboard, Modal, SafeAreaView, ScrollView, Text, TouchableWithoutFeedback, View,
 } from 'react-native';
+import Avatar from '@components/Avatar';
 import Button from '@components/Button';
 import i18n from '@resources/translations';
 import TextInput from '@components/TextInput';
@@ -261,20 +262,11 @@ class ProfileScreen extends AbstractImageUpload<Props, State> {
         <ScrollView style={styles.container}>
           <View style={styles.header} />
           <View style={styles.avatarContainer}>
-            <Touchable style={styles.avatarBackground} onPress={this.toggleChangePictureModal}>
-              <View style={styles.avatar}>
-                {!photoURL ? (
-                  <Icon name="face" size={50} />
-                ) : (
-                  <Image source={{ uri: photoURL }} style={styles.avatar} />
-                )}
-                {(isPhotoURLUpdateLoading || isProfilePictureUploading) && (
-                  <View style={styles.activityIndicator}>
-                    <ActivityIndicator />
-                  </View>
-                )}
-              </View>
-            </Touchable>
+            <Avatar
+              isLoading={isPhotoURLUpdateLoading || isProfilePictureUploading}
+              onPress={this.toggleChangePictureModal}
+              photoURL={photoURL}
+            />
             <Touchable onPress={this.toggleChangePictureModal} style={styles.changeAvatarContainer}>
               <Icon name="edit" size={16} />
             </Touchable>
