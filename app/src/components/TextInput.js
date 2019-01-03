@@ -8,6 +8,7 @@ import styles from './styles/TextInputStyles';
 type Props = {
   ...OfficialTextInput.propTypes,
   containerStyle?: ViewStyleProp,
+  isLoading?: Boolean,
 };
 
 export default class TextInput extends React.PureComponent<Props> {
@@ -31,7 +32,7 @@ export default class TextInput extends React.PureComponent<Props> {
           ref={(ref) => { this.textInput = ref; }}
           style={[styles.defaultTextInput, this.props.style]}
         />
-        <ActivityIndicator size="small" color="#0000ff" animating={isLoading} />
+        <ActivityIndicator size="small" color={Colors.defaultApp.blueGreen} animating={isLoading} />
       </View>
     );
   }
