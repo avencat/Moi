@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { SafeAreaView, ScrollView } from 'react-native';
+import { SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import i18n from '@resources/translations';
 import TextInput from '@components/TextInput';
@@ -22,6 +22,7 @@ type Props = NavigationScreenProps & {
 type State = {
   error?: string,
   post: string,
+  isAddPostLoading: boolean,
 };
 
 const mapStateToProps = state => ({
@@ -33,6 +34,7 @@ const mapDispatchToProps = dispatch => ({
 class HomeScreen extends React.Component<Props, State> {
   static navigationOptions = ({ navigation }) => ({
     headerLeft: <DrawerButton openDrawer={navigation.openDrawer} />,
+    title: i18n.t('POST.TITLE'),
   });
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -57,6 +59,7 @@ class HomeScreen extends React.Component<Props, State> {
     this.state = {
       error: null,
       post: '',
+      isAddPostLoading: false,
     };
   }
 
@@ -74,7 +77,9 @@ class HomeScreen extends React.Component<Props, State> {
 
   render() {
     const {
-      post, error,
+      post,
+      error,
+      isAddPostLoading,
     } = this.state;
 
     return (
@@ -88,6 +93,11 @@ class HomeScreen extends React.Component<Props, State> {
             returnKeyType="send"
             blurOnSubmit
             value={post}
+          />
+          <ActivityIndicator
+            size="large"
+            color="#00ff00"
+            animating={isAddPostLoading}
           />
         </ScrollView>
       </SafeAreaView>

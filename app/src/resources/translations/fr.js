@@ -38,6 +38,7 @@ export default {
   },
   POST: {
     WHATS_UP: 'Quoi de neuf ?',
+    TITLE: 'Accueil',
   },
   PROFILE: {
     CHANGE_PASSWORD: 'Changer mot de passe',
