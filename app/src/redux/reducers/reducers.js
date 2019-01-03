@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import { reducer as user } from '@redux/reducers/user';
 import { reducer as login } from '@containers/login/redux/loginReducer';
 import { reducer as logout } from '@containers/login/redux/logoutReducer';
+import { reducer as getPosts } from '@containers/home/redux/getPostsReducer';
 import { reducer as register } from '@containers/login/redux/registerReducer';
 import { reducer as updateEmail } from '@containers/profile/redux/updateEmailReducer';
 import { reducer as updatePassword } from '@containers/profile/redux/updatePasswordReducer';
@@ -18,6 +19,7 @@ export default combineReducers({
   forms: combineReducers({
     login,
     logout,
+    getPosts,
     register,
     updateEmail,
     updatePassword,

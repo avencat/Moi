@@ -1,6 +1,7 @@
 import { fork } from 'redux-saga/effects';
 import { loginSaga } from '@containers/login/sagas/loginSaga';
 import { logoutSaga } from '@containers/login/sagas/logoutSaga';
+import { getPostsSaga } from '@containers/home/sagas/getPostsSaga';
 import { registerSaga } from '@containers/login/sagas/registerSaga';
 import { updateEmailSaga } from '@containers/profile/sagas/updateEmailSaga';
 import { updatePasswordSaga } from '@containers/profile/sagas/updatePasswordSaga';
@@ -15,6 +16,7 @@ import { updateDatabaseUsernameSaga } from '@containers/profile/sagas/updateData
 export default function* root() {
   yield fork(loginSaga);
   yield fork(logoutSaga);
+  yield fork(getPostsSaga);
   yield fork(registerSaga);
   yield fork(updateEmailSaga);
   yield fork(updatePasswordSaga);
