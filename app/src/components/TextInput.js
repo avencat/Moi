@@ -8,7 +8,7 @@ import styles from './styles/TextInputStyles';
 type Props = {
   ...OfficialTextInput.propTypes,
   containerStyle?: ViewStyleProp,
-  isLoading?: Boolean,
+  isLoading?: boolean,
 };
 
 export default class TextInput extends React.PureComponent<Props> {
