@@ -8,6 +8,7 @@ import { reducer as updateEmail } from '@containers/profile/redux/updateEmailRed
 import { reducer as updatePassword } from '@containers/profile/redux/updatePasswordReducer';
 import { reducer as updatePhotoURL } from '@containers/profile/redux/updatePhotoURLReducer';
 import { reducer as updateUsername } from '@containers/profile/redux/updateUsernameReducer';
+import { reducer as addPostToDatabase } from '@containers/home/redux/addPostToDatabaseReducer';
 import { reducer as addUserToDatabase } from '@containers/login/redux/addUserToDatabaseReducer';
 import { reducer as uploadProfilePicture } from '@containers/profile/redux/uploadProfilePictureReducer';
 import { reducer as updateDatabasePhotoURL } from '@containers/profile/redux/updateDatabasePhotoURLReducer';
@@ -22,6 +23,7 @@ export default combineReducers({
     updatePassword,
     updatePhotoURL,
     updateUsername,
+    addPostToDatabase,
     addUserToDatabase,
     uploadProfilePicture,
     updateDatabasePhotoURL,

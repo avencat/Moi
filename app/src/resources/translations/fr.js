@@ -36,6 +36,9 @@ export default {
     REGISTER: "S'inscrire",
     TITLE: 'Moi',
   },
+  POST: {
+    WHATS_UP: 'Quoi de neuf ?',
+  },
   PROFILE: {
     CHANGE_PASSWORD: 'Changer mot de passe',
     FORM: {

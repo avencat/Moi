@@ -36,6 +36,9 @@ export default {
     REGISTER: 'Register',
     TITLE: 'Me',
   },
+  POST: {
+    WHATS_UP: "What's on your mind?",
+  },
   PROFILE: {
     CHANGE_PASSWORD: 'Change password',
     FORM: {
