@@ -6,6 +6,7 @@ import { updateEmailSaga } from '@containers/profile/sagas/updateEmailSaga';
 import { updatePasswordSaga } from '@containers/profile/sagas/updatePasswordSaga';
 import { updatePhotoURLSaga } from '@containers/profile/sagas/updatePhotoURLSaga';
 import { updateUsernameSaga } from '@containers/profile/sagas/updateUsernameSaga';
+import { addPostToDatabaseSaga } from '@containers/home/sagas/addPostToDatabaseSaga';
 import { addUserToDatabaseSaga } from '@containers/login/sagas/addUserToDatabaseSaga';
 import { uploadProfilePictureSaga } from '@containers/profile/sagas/uploadProfilePictureSaga';
 import { updateDatabasePhotoURLSaga } from '@containers/profile/sagas/updateDatabasePhotoURLSaga';
@@ -20,6 +21,7 @@ export default function* root() {
   yield fork(updatePhotoURLSaga);
   yield fork(updateUsernameSaga);
   yield fork(addUserToDatabaseSaga);
+  yield fork(addPostToDatabaseSaga);
   yield fork(uploadProfilePictureSaga);
   yield fork(updateDatabasePhotoURLSaga);
   yield fork(updateDatabaseUsernameSaga);

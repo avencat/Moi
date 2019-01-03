@@ -1,23 +1,30 @@
 import firebase from 'firebase';
-import { put, takeEvery } from 'redux-saga/effects';
+import { put, select, takeEvery } from 'redux-saga/effects';
 import { AddPostToDatabaseCreators, AddPostToDatabaseTypes } from '@containers/home/redux/addPostToDatabaseReducer';
 
 /**
- * Auth Add User To Database task
+ * Add Post To Database task
  */
 
-export function* authAddPostToDatabaseTask({ payload }) {
+export function* addPostToDatabaseTask({ payload }) {
   try {
     // request post information
-    const userPost = {
-      id: Date.now() + payload.username,
-      content: payload.postContent,
-      timestamp: Date.now(),
-      userId: payload.userId,
-    };
-    yield firebase.database().ref(`/post/${payload.uid}`).set(userPost);
+    const store = yield select();
+    const { user } = store;
+    const timestamp = yield Date.now();
 
-    yield put(AddPostToDatabaseCreators.addPostToDatabaseRequestSuccess(payload));
+    const ref = yield firebase.database().ref('/posts');
+    const newChildRef = yield ref.push();
+
+    const userPost = {
+      id: newChildRef.key,
+      content: payload.postContent,
+      timestamp,
+      userId: user.uid,
+    };
+    yield newChildRef.set(userPost);
+
+    yield put(AddPostToDatabaseCreators.addPostToDatabaseRequestSuccess(userPost));
   } catch (error) {
     yield put(
       AddPostToDatabaseCreators.addPostToDatabaseRequestFailure(
@@ -28,8 +35,8 @@ export function* authAddPostToDatabaseTask({ payload }) {
 }
 
 /**
- * Loop Add User To Database saga
+ * Loop Add Post To Database saga
  */
 export function* addPostToDatabaseSaga() {
-  yield takeEvery(AddPostToDatabaseTypes.ADD_POST_TO_DATABASE_REQUEST, authAddPostToDatabaseTask);
+  yield takeEvery(AddPostToDatabaseTypes.ADD_POST_TO_DATABASE_REQUEST, addPostToDatabaseTask);
 }

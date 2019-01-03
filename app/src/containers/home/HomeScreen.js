@@ -1,57 +1,75 @@
 // @flow
 import * as React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-} from 'react-native';
+import { connect } from 'react-redux';
+import { SafeAreaView, ScrollView } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
-import DrawerButton from '@components/DrawerButton';
 import i18n from '@resources/translations';
 import TextInput from '@components/TextInput';
-import { PostCreators } from '@containers/home/redux/postReducer';
-import connect from 'react-redux/es/connect/connect';
+import DrawerButton from '@components/DrawerButton';
 import ErrorComponent from '@components/ErrorComponent';
+import { AddPostToDatabaseCreators } from '@containers/home/redux/addPostToDatabaseReducer';
 import styles from './HomeScreenStyles';
 
 type Props = NavigationScreenProps & {
-  post: {
+  addPostToDatabase: {
     error?: string,
     fetching: boolean,
     success: boolean,
   },
-  postRequest: Function,
+  addPostToDatabaseRequest: Function,
+};
+
+type State = {
+  error?: string,
+  post: string,
 };
 
 const mapStateToProps = state => ({
-  user: state.post,
+  addPostToDatabase: state.forms.addPostToDatabase,
 });
 const mapDispatchToProps = dispatch => ({
-  homeRequest: payload => dispatch(PostCreators.postRequest(payload)),
+  addPostToDatabaseRequest: payload => dispatch(AddPostToDatabaseCreators.addPostToDatabaseRequest(payload)),
 });
-
-class HomeScreen extends React.PureComponent<Props> {
+class HomeScreen extends React.Component<Props, State> {
   static navigationOptions = ({ navigation }) => ({
     headerLeft: <DrawerButton openDrawer={navigation.openDrawer} />,
   });
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const nextState = { isAddPostLoading: nextProps.addPostToDatabase.fetching };
+
+    if (nextProps.addPostToDatabase.success && prevState.isAddPostLoading && !nextState.isAddPostLoading) {
+      Object.assign(nextState, {
+        post: '',
+      });
+    } else if (!nextProps.addPostToDatabase.success && prevState.isAddPostLoading && !nextState.isAddPostLoading) {
+      Object.assign(nextState, {
+        error: nextProps.addPostToDatabase.error,
+      });
+    }
+
+    return nextState;
+  }
 
   constructor(props) {
     super(props);
 
     this.state = {
-      post: '',
       error: null,
+      post: '',
     };
   }
 
+  onChangePost = (post: string) => this.setState({ post });
+
   onPost = () => {
     const { post } = this.state;
+
     if (!post) {
-      this.setState({ error: i18n.t('POST.FORM.ERROR.FILL') });
       return;
     }
 
-    this.props.postRequest({ post });
+    this.props.addPostToDatabaseRequest({ postContent: post });
   };
 
   render() {
@@ -63,10 +81,10 @@ class HomeScreen extends React.PureComponent<Props> {
       <SafeAreaView style={styles.container}>
         <ErrorComponent show={!!error}>{error}</ErrorComponent>
         <ScrollView style={styles.container}>
-          <View style={styles.header} />
           <TextInput
-            placeholder={"What's on your mind"}
-            onSubmitEditing={this.onPost()}
+            placeholder={i18n.t('POST.WHATS_UP')}
+            onChangeText={this.onChangePost}
+            onSubmitEditing={this.onPost}
             returnKeyType="send"
             blurOnSubmit
             value={post}

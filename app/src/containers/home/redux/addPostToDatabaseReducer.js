@@ -37,7 +37,7 @@ const INITIAL_STATE = Immutable({
 
 const addPostToDatabaseRequest = () => INITIAL_STATE.merge({ fetching: true });
 
-const addPostToDatabaseRequestSuccess = (state, { user }) => INITIAL_STATE.merge({ success: true, user });
+const addPostToDatabaseRequestSuccess = (state, { post }) => INITIAL_STATE.merge({ success: true, post });
 
 const addPostToDatabaseRequestFailure = (state, { error }) => INITIAL_STATE.merge({ error });
 
