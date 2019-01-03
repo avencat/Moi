@@ -266,6 +266,7 @@ class ProfileScreen extends AbstractImageUpload<Props, State> {
               isLoading={isPhotoURLUpdateLoading || isProfilePictureUploading}
               onPress={this.toggleChangePictureModal}
               photoURL={photoURL}
+              size="large"
             />
             <Touchable onPress={this.toggleChangePictureModal} style={styles.changeAvatarContainer}>
               <Icon name="edit" size={16} />
