@@ -3,6 +3,7 @@ import { Colors, Fonts, Metrics } from '@resources/themes';
 
 export default StyleSheet.create({
   container: {
+    flexDirection: 'row',
     alignSelf: 'center',
     backgroundColor: Colors.white,
     borderColor: Colors.border,
@@ -14,6 +15,7 @@ export default StyleSheet.create({
   },
 
   defaultTextInput: {
+    flexGrow: 1,
     color: Colors.text.base,
     padding: 0,
     fontFamily: Fonts.type.base,

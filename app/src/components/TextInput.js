@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { TextInput as OfficialTextInput, View } from 'react-native';
+import { TextInput as OfficialTextInput, View, ActivityIndicator } from 'react-native';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { Colors } from '@resources/themes';
 import styles from './styles/TextInputStyles';
@@ -14,6 +14,7 @@ export default class TextInput extends React.PureComponent<Props> {
   static defaultProps = {
     containerStyle: {},
     underlineColorAndroid: Colors.transparent,
+    isLoading: false,
   };
 
   blur = () => this.textInput.blur();
@@ -21,7 +22,7 @@ export default class TextInput extends React.PureComponent<Props> {
   focus = () => this.textInput.focus();
 
   render() {
-    const { containerStyle } = this.props;
+    const { containerStyle, isLoading } = this.props;
 
     return (
       <View style={[styles.container, containerStyle]}>
@@ -30,6 +31,7 @@ export default class TextInput extends React.PureComponent<Props> {
           ref={(ref) => { this.textInput = ref; }}
           style={[styles.defaultTextInput, this.props.style]}
         />
+        <ActivityIndicator size="small" color="#0000ff" animating={isLoading} />
       </View>
     );
   }
