@@ -10,7 +10,7 @@ export function* getPostsTask() {
   try {
     const ref = yield firebase.database().ref('/posts').once('value');
     const postsValues = yield ref.val();
-    const posts = Object.values(postsValues);
+    const posts = Object.values(postsValues).reverse();
 
     yield put(GetPostsCreators.getPostsRequestSuccess(posts));
   } catch (error) {

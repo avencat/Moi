@@ -15,6 +15,16 @@ type Props = NavigationScreenProps & {
   addPostToDatabase: {
     error?: string,
     fetching: boolean,
+    post: {
+      content: string,
+      id: string,
+      timestamp: number,
+      user: {
+        photoURL?: string,
+        uid: string,
+        username: string,
+      },
+    },
     success: boolean,
   },
   addPostToDatabaseRequest: Function,
@@ -56,8 +66,12 @@ class HomeScreen extends React.Component<Props, State> {
     };
 
     if (nextProps.addPostToDatabase.success && prevState.isAddPostLoading && !nextState.isAddPostLoading) {
+      const newPosts = [...prevState.posts];
+      newPosts.unshift(nextProps.addPostToDatabase.post);
+
       Object.assign(nextState, {
         post: '',
+        posts: newPosts,
       });
     } else if (!nextProps.addPostToDatabase.success && prevState.isAddPostLoading && !nextState.isAddPostLoading) {
       Object.assign(nextState, {
