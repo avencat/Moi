@@ -20,7 +20,11 @@ export function* addPostToDatabaseTask({ payload }) {
       id: newChildRef.key,
       content: payload.postContent,
       timestamp,
-      userId: user.uid,
+      user: {
+        uid: user.uid,
+        username: user.displayName || user.email,
+        photoURL: user.photoURL,
+      },
     };
     yield newChildRef.set(userPost);
 

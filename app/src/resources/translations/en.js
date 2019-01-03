@@ -38,6 +38,7 @@ export default {
   },
   POST: {
     WHATS_UP: "What's on your mind?",
+    TITLE: 'Home',
   },
   PROFILE: {
     CHANGE_PASSWORD: 'Change password',

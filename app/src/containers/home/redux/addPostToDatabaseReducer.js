@@ -30,7 +30,7 @@ const INITIAL_STATE = Immutable({
   error: null,
   fetching: false,
   success: false,
-  user: null,
+  post: null,
 });
 
 /* ------------- Reducers ------------- */
