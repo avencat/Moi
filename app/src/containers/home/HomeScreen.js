@@ -3,7 +3,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { ListItem } from 'react-native-elements';
 import { NavigationScreenProps } from 'react-navigation';
-import { FlatList, SafeAreaView, Text } from 'react-native';
+import { FlatList, SafeAreaView } from 'react-native';
+import Avatar from '@components/Avatar';
 import i18n from '@resources/translations';
 import TextInput from '@components/TextInput';
 import DrawerButton from '@components/DrawerButton';
@@ -11,7 +12,6 @@ import ErrorComponent from '@components/ErrorComponent';
 import { GetPostsCreators } from '@containers/home/redux/getPostsReducer';
 import { AddPostToDatabaseCreators } from '@containers/home/redux/addPostToDatabaseReducer';
 import styles from './HomeScreenStyles';
-import Avatar from '@components/Avatar';
 
 type Props = NavigationScreenProps & {
   addPostToDatabase: {
