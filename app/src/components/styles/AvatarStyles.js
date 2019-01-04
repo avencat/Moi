@@ -6,22 +6,22 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.white,
     borderRadius: 34,
-    height: 68,
+    height: '92%',
     justifyContent: 'center',
     left: 0,
     opacity: 0.7,
     position: 'absolute',
     top: 0,
-    width: 68,
+    width: '92%',
   },
 
   avatar: {
     alignItems: 'center',
     backgroundColor: Colors.white,
     borderRadius: 34,
-    height: 68,
+    height: '92%',
     justifyContent: 'center',
-    width: 68,
+    width: '92%',
   },
 
   avatarBackground: {
@@ -29,8 +29,8 @@ export default StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: Colors.defaultApp.blueGreen,
     borderRadius: 37,
-    height: 74,
+    height: '100%',
     justifyContent: 'center',
-    width: 74,
+    width: '100%',
   },
 });
