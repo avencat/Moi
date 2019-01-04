@@ -17,7 +17,8 @@ lane :beta do
   # build your iOS app
   build_app(
     # scheme: "YourScheme",
-    export_method: "ad-hoc"
+    export_method: "ad-hoc",
+    export_xcargs: "-allowProvisioningUpdates"
   )
 
   # upload to Beta by Crashlytics
