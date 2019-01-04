@@ -61,6 +61,8 @@
 		C1676E74B08340E2BBE43F9D /* libTouchID.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DE7CCBF2A54B6185DA146F /* libTouchID.a */; };
 		C6B999121AA049CDA1078A22 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95B9B9E8A9774E8DBE98F344 /* Zocial.ttf */; };
 		CC3EBC2BF2DA4423AA5094EC /* libRCTImageResizer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFDD6C8BBD034F97A32B23C3 /* libRCTImageResizer.a */; };
+		D005CD3021DF8DAF00AB5E42 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D005CD2E21DF8DAF00AB5E42 /* Crashlytics.framework */; };
+		D005CD3121DF8DAF00AB5E42 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D005CD2F21DF8DAF00AB5E42 /* Fabric.framework */; };
 		D0DDB2EF21C25B69004FF9C5 /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DDB2EE21C25B69004FF9C5 /* RSKImageCropper.framework */; };
 		D0DDB2F021C25B69004FF9C5 /* RSKImageCropper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0DDB2EE21C25B69004FF9C5 /* RSKImageCropper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D0DDB2F321C25B70004FF9C5 /* QBImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DDB2F221C25B70004FF9C5 /* QBImagePicker.framework */; };
@@ -528,6 +530,8 @@
 		B051A6A76A604636B603F969 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		BB262D68E96A487B9FD25E2B /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
 		CAE7DA0DB8E543ED95FDD0D9 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativePermissions.xcodeproj; path = "../node_modules/react-native-permissions/ios/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; };
+		D005CD2E21DF8DAF00AB5E42 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		D005CD2F21DF8DAF00AB5E42 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		D049136821C55BB40061666A /* Moi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Moi.entitlements; path = Moi/Moi.entitlements; sourceTree = "<group>"; };
 		D0DDB2EE21C25B69004FF9C5 /* RSKImageCropper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RSKImageCropper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0DDB2F221C25B70004FF9C5 /* QBImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = QBImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -577,6 +581,8 @@
 				870052E2E5EB465CAB518C94 /* libReactNativeConfig.a in Frameworks */,
 				F2308133073D44B5A2879053 /* libimageCropPicker.a in Frameworks */,
 				2417F6F90E7D471AB6442FFB /* libReactNativePermissions.a in Frameworks */,
+				D005CD3121DF8DAF00AB5E42 /* Fabric.framework in Frameworks */,
+				D005CD3021DF8DAF00AB5E42 /* Crashlytics.framework in Frameworks */,
 				CC3EBC2BF2DA4423AA5094EC /* libRCTImageResizer.a in Frameworks */,
 				EBE98049427A4D6B9CF73B5F /* libRNFetchBlob.a in Frameworks */,
 				7D9C15C3DF8C4AA793F392E2 /* libRNKeychain.a in Frameworks */,
@@ -804,6 +810,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				D005CD2E21DF8DAF00AB5E42 /* Crashlytics.framework */,
+				D005CD2F21DF8DAF00AB5E42 /* Fabric.framework */,
 				D0DDB2F221C25B70004FF9C5 /* QBImagePicker.framework */,
 				D0DDB2EE21C25B69004FF9C5 /* RSKImageCropper.framework */,
 				13B07FAE1A68108700A75B9A /* Moi */,
@@ -991,6 +999,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				D0DDB2F121C25B69004FF9C5 /* Embed Frameworks */,
+				D005CCF921DF8D6B00AB5E42 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1626,6 +1635,23 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		D005CCF921DF8D6B00AB5E42 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 50d9878dd763534eb2f4a720a90cad0668a04c9e 0285c26d11d1bb489ed32a46636ead3d9331fe5e61deb705a499b7f293245333\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1799,6 +1825,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = Z258W9QL44;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
@@ -1836,6 +1866,10 @@
 				CODE_SIGN_ENTITLEMENTS = Moi/Moi.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z258W9QL44;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",

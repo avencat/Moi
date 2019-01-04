@@ -22,6 +22,20 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>50d9878dd763534eb2f4a720a90cad0668a04c9e</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -38,23 +52,25 @@
 		</dict>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>we don&apos;t use it</string>
+	<string>we don't use it</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>we don&apos;t use it</string>
+	<string>we don't use it</string>
 	<key>NSCalendarsUsageDescription</key>
-	<string>we don&apos;t use it</string>
+	<string>we don't use it</string>
 	<key>NSCameraUsageDescription</key>
 	<string>to take your profile picture</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>to allow you quick and secure access to your account.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSMotionUsageDescription</key>
-	<string>we don&apos;t use it</string>
+	<string>we don't use it</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>to pick your profile picture</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>to pick your profile picture</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>we don&apos;t use it</string>
+	<string>we don't use it</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -86,7 +102,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSFaceIDUsageDescription</key>
-	<string>to allow you quick and secure access to your account.</string>
 </dict>
 </plist>
