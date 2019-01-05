@@ -24,6 +24,17 @@ FIREBASE_STORAGE_BUCKET=
 FIREBASE_MESSAGING_SENDER_ID=
 ```
 For the value of these keys, please contact us.
+
+## Deploy a beta with fastlane
+
+You must have fastlane command line tools installed, then:
+### For Android
+    cd android
+    fastlane beta
+    
+### For iOS
+    cd ios
+    fastlane beta
     
 ## Run
 
