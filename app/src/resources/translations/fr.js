@@ -35,6 +35,7 @@ export default {
     LOGIN: 'Se connecter',
     REGISTER: "S'inscrire",
     TITLE: 'Moi',
+    TOUCH_ID_LOGIN: 'Se connecter avec le compte',
   },
   POST: {
     WHATS_UP: 'Quoi de neuf ?',

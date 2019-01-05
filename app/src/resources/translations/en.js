@@ -35,6 +35,7 @@ export default {
     LOGIN: 'Login',
     REGISTER: 'Register',
     TITLE: 'Me',
+    TOUCH_ID_LOGIN: 'Log in with the account',
   },
   POST: {
     WHATS_UP: "What's on your mind?",

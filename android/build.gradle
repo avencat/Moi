@@ -11,6 +11,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
@@ -35,6 +36,22 @@ allprojects {
 
         // ADD THIS
         maven { url "https://jitpack.io" }
+
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    // force libs to use recent buildtools
+    // https://github.com/luggit/react-native-config/issues/299
+    subprojects {
+        afterEvaluate {
+            project ->
+                if (project.hasProperty("android")) {
+                    android {
+                        compileSdkVersion = 27
+                        buildToolsVersion = "27.0.3"
+                    }
+                }
+        }
     }
 }
 
